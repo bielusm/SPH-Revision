@@ -68,12 +68,6 @@ void Program::draw(sf::RenderWindow& window)
 		
 	}
 
-
-	//sf::CircleShape shape(100.0f);
-	//shape.setFillColor(sf::Color::Green);
-	////shape.setPosition(x, y);
-	//window.draw(shape);
-
 	window.display();
 }
 
