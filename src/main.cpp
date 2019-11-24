@@ -3,7 +3,7 @@
 
 int main()
 {
-	Program *program = new Program(1000,1000);
+	Program *program = new Program(500,500);
 	program->run();
 
 	delete program;

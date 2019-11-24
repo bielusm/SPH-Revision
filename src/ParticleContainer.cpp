@@ -19,7 +19,7 @@ ParticleContainer::ParticleContainer(int MAXPARTICLES)
 			float x = -5.0f - (i * (particleSize + BUFFER));
 			float y = 5.0f + (j * (particleSize + BUFFER)) - (i * (particleSize + BUFFER));
 			glm::vec3 pos(x, y, 1);
-			glm::vec3 vel(50.0f, 10.0f, 0);
+			glm::vec3 vel(100.0f, 20.0f, 0);
 			particles.push_back(Particle(pos, vel, index, 1.0f));
 			index++;
 		}
@@ -32,7 +32,7 @@ ParticleContainer::ParticleContainer(int MAXPARTICLES)
 			float x = 5.0f + (i * (particleSize + BUFFER));
 			float y = 5.0f + (j * (particleSize + BUFFER)) - (i * (particleSize + BUFFER));
 			glm::vec3 pos(x, y, 1);
-			glm::vec3 vel(-50.0f, 10.0f, 0);
+			glm::vec3 vel(-100.0f, 10.0f, 0);
 			particles.push_back(Particle(pos, vel, index, 1.0f));
 			index++;
 		}

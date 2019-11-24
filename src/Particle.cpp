@@ -116,7 +116,7 @@ glm::vec2 Particle::fViscosity()
 		glm::vec2 vij = vi - vj;
 		glm::vec2 xij = (pos - p->pos);
 		sum += (mj / p0) * vij * 
-		(xij * spikyGrad(glm::length(xij)/hVal)) /
+		(xij * viscosityGrad(glm::length(xij)/hVal)) /
 			(glm::dot(xij, xij) + (0.01f*pow(hVal, 2)));
 	}
 	return  mj* vis* 2 * sum;
