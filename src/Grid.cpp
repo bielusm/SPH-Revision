@@ -1,6 +1,7 @@
 #include "Grid.h"
 #include <iostream>
 #include <glm/common.hpp>
+#include "Constants.h"
 
 //from https://stackoverflow.com/questions/10238699/dynamically-allocating-3d-array
 Grid::Grid(float left, float right, float top, float bottom)

@@ -1,3 +1,4 @@
+#define USE_MATH_DEFINES
 #include "Program.h"
 
 

@@ -2,6 +2,7 @@
 #include "glm\gtx\norm.hpp"
 #include <iostream>
 #include "rect.h"
+#include "Constants.h"
 #define lambda 0.4
 #define BUFFER 0.5f
 
