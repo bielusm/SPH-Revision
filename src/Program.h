@@ -5,7 +5,7 @@
 class Program
 {
 public:
-	Program();
+	Program(int height, int width);
 	~Program();
 
 	void run();
@@ -14,5 +14,9 @@ private:
 	void simulate(float dt);
 
 	ParticleContainer *pc;
+	int width;
+	int height;
+	sf::Clock clock;
+
 };
 
