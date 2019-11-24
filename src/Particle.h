@@ -1,6 +1,6 @@
 #pragma once
-#include <glm\common.hpp>
 #include <vector>
+#include <glm/vec2.hpp>
 #define particleSize 0.2f
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -26,17 +26,17 @@ public:
 	void CalcImmediateVelocity(float dt);
 	void CalcImmediateDensity(float dt);
 
-	void Particle::fPressure();
+	void fPressure();
 	glm::vec2 fViscosity();
-	glm::vec2 Particle::fOther();
+	glm::vec2 fOther();
 
 	float poly6(float r);
 
 	float viscosityGrad(float r);
 	float viscosityLap(float r);
 
-	void Particle::CalcVelocity(float dt);
-	void Particle::CalcPosition(float dt);
+	void CalcVelocity(float dt);
+	void CalcPosition(float dt);
 	
 	glm::vec2 localVelocity;
 	glm::vec2 immediateVel;

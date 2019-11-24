@@ -1,20 +1,19 @@
 #pragma once
 #include "Particle.h"
-#include "common.h"
 #include <vector>
 #include "glm\glm.hpp"
 #include "Grid.h"
 class ParticleContainer
 {
 public:
-	int MAXPARTICLES;
-	void updateParticles(float dt);
-	void findNeighbors(Particle &p, int pIndex);
 	ParticleContainer(int MAXPARTICLES);
-	void getPositions(std::vector<GLfloat> &positions);
 	~ParticleContainer();
+	void updateParticles(float dt);
 	std::vector <Particle> particles;
-
+	void getPositions(std::vector<float>& positions);
+private:
+	int MAXPARTICLES;
+	void findNeighbors(Particle &p, int pIndex);
 	Grid *grid;
 };
 

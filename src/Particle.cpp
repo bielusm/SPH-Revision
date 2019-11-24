@@ -1,6 +1,7 @@
-#include <iostream>
-#include "glm\glm.hpp"
+#include <SFML/Main.hpp>
 #include "Particle.h"
+#include <glm/glm.hpp>
+
 #define d 2 // dimensionns
 #define p0 998.29f //from https://www10.cs.fau.de/publications/theses/2010/Staubach_BT_2010.pdf
 #define k 3.0f //from https://www10.cs.fau.de/publications/theses/2010/Staubach_BT_2010.pdf table 3.2
