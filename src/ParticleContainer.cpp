@@ -1,11 +1,12 @@
 #include "ParticleContainer.h"
 #include "glm\gtx\norm.hpp"
 #include <iostream>
+#include "rect.h"
 #define lambda 0.4
 #define BUFFER 0.5f
 
-ParticleContainer::ParticleContainer(int MAXPARTICLES)
-	: MAXPARTICLES(MAXPARTICLES)
+ParticleContainer::ParticleContainer(int MAXPARTICLES, Rect boundaries)
+	: MAXPARTICLES(MAXPARTICLES), boundaries(boundaries)
 {
 	grid = new Grid(-500.0f, 500.0f, -500.0f, 500.0f);
 	float neg = 1;
@@ -19,7 +20,7 @@ ParticleContainer::ParticleContainer(int MAXPARTICLES)
 			float x = -5.0f - (i * (particleSize + BUFFER));
 			float y = 5.0f + (j * (particleSize + BUFFER)) - (i * (particleSize + BUFFER));
 			glm::vec3 pos(x, y, 1);
-			glm::vec3 vel(100.0f, 20.0f, 0);
+			glm::vec3 vel(0.0f, 0.0f, 0);
 			particles.push_back(Particle(pos, vel, index, 1.0f));
 			index++;
 		}
@@ -32,7 +33,7 @@ ParticleContainer::ParticleContainer(int MAXPARTICLES)
 			float x = 5.0f + (i * (particleSize + BUFFER));
 			float y = 5.0f + (j * (particleSize + BUFFER)) - (i * (particleSize + BUFFER));
 			glm::vec3 pos(x, y, 1);
-			glm::vec3 vel(-100.0f, 10.0f, 0);
+			glm::vec3 vel(0.0f, 0.0f, 0);
 			particles.push_back(Particle(pos, vel, index, 1.0f));
 			index++;
 		}
@@ -81,6 +82,7 @@ void ParticleContainer::updateParticles(float dt)
 
 		p.CalcVelocity(stepVal);
 		p.CalcPosition(stepVal);
+		setInBounds(p);
 		glm::ivec2 gc = grid->updateCoord(p.index, p.gridCoords, p.pos);
 		p.gridCoords = gc;
 	}
@@ -110,9 +112,43 @@ void ParticleContainer::getPositions(std::vector<float>& positions)
 		positions.push_back(1.0f);
 	}
 }
+
+//boundary conditions from Particle-Based Fluid Simulation for Interactive Applications
+//Matthias Müller, David Charypar and Markus Gross
+void ParticleContainer::setInBounds(Particle &p)
+{
+	glm::vec2 pos = p.pos;
+	glm::vec2 vel = p.localVelocity;
+	if (pos.x < boundaries.left)
+	{
+		pos.x = boundaries.left + 1;
+		vel.x = -vel.x;
+	}
+	else if (pos.x > boundaries.right)
+	{
+		pos.x = boundaries.right - 1;
+		vel.x = -vel.x;
+		
+	}
+	else if (pos.y > boundaries.top)
+	{
+		pos.y = boundaries.top - 1;
+		vel.y = -vel.y;
+	}
+	else if (pos.y < boundaries.bottom)
+	{
+		pos.y = boundaries.bottom + 1;
+		vel.y = -vel.y;
+	}
+	p.pos = pos;
+	p.localVelocity = vel;
+	
+}
 ParticleContainer::~ParticleContainer()
 {
 	delete grid;
 }
+
+
 
 

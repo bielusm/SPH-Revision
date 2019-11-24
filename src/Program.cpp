@@ -1,11 +1,12 @@
 #include "Program.h"
 #include "ParticleContainer.h"
 #include <SFML/graphics.hpp>
+#include "rect.h"
 
 Program::Program(int height, int width)
 	: height(height), width(width)
 {
-	pc = new ParticleContainer(1000);
+	pc = new ParticleContainer(1000,Rect(-200, 200,200,-200));
 }
 
 

@@ -24,12 +24,14 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\ParticleContainer.cpp" />
+    <ClCompile Include="src\rect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.h" />
     <ClInclude Include="src\Grid.h" />
     <ClInclude Include="src\Particle.h" />
     <ClInclude Include="src\ParticleContainer.h" />
+    <ClCompile Include="src\rect.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

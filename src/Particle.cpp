@@ -245,6 +245,7 @@ void Particle::clear()
 	neighbors.clear();
 	Fi = glm::vec3( 0,0,0);
 }
+
 void Particle::addNeighbor(Particle *p)
 {
 	neighbors.push_back(p);
