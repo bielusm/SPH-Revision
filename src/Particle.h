@@ -27,7 +27,7 @@ public:
 	glm::vec2 localVelocity;
 	glm::vec2 immediateVel;
 	void CalcPressure();
-	glm::vec2 idPi;
+	glm::vec2 density;
 	glm::vec2 dPi;
 	glm::vec2 pressure;
 	std::vector<Particle*> neighbors;
