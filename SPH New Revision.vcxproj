@@ -136,10 +136,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src/Graphics/IGraphics.hpp" />
-    <ClCompile Include="src/main.cpp" />
-    <ClCompile Include="src/Physics/particle.cpp" />
-    <ClCompile Include="src/Program.cpp" />
-    <ClCompile Include="src/Graphics/SFML.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/Program.h" />
