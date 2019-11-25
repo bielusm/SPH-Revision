@@ -2,11 +2,12 @@
 #include "ParticleContainer.h"
 #include <SFML/graphics.hpp>
 #include "rect.h"
+#include "Constants.h"
 
 Program::Program(int height, int width)
 	: height(height), width(width)
 {
-	pc = new ParticleContainer(3000,Rect(-200, 200,200,-200));
+	pc = new ParticleContainer(MAX_PARTICLES,Rect(-200, 200,200,-200));
 }
 
 

@@ -54,7 +54,7 @@ glm::vec2 Particle::fPressure()
 		float Aj = p->pressurePi;
 		float phiJ = p->density;
 
-		pressureForce += mj * (Ai + Aj) / (phiJ * 2.0f) * Kernel::spikyGrad(glm::length(pos - p->pos));
+		pressureForce += ((Ai + Aj)/ 2.0f) * (mj /phiJ) * Kernel::spikyGrad(glm::length(pos - p->pos));
 	}
 	return -pressureForce;
 }
