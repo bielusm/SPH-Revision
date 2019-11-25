@@ -4,22 +4,16 @@
 #include "Kernel.h"
 #include "Constants.h"
 
-Particle::Particle(glm::vec2 pos, glm::vec2 localVelocity, int index, float size)
+Particle::Particle(glm::vec2 pos, glm::vec2 localVelocity, int index)
 	:pos(pos), localVelocity(localVelocity), index(index)
 {
+	density = 0;
+	pressurePi = 0;
 }
 
 void Particle::CalcPressure()
 {
-	if (neighbors.size() > 0)
-	{
-		pressurePi = PressurePi(density);
-	}
-	else
-	{
-		density = p0;
-		pressurePi = PressurePi(density);
-	}
+	pressurePi = PressurePi(density);
 }
 
 float Particle::PressurePi(float dPi)
@@ -29,26 +23,21 @@ float Particle::PressurePi(float dPi)
 	return k * (density - p0);
 }
 
-void Particle::CalcImmediateVelocity(float dt)
-{
-	glm::vec2 fVisG = fViscosity() + fOther();
-	immediateVel = localVelocity + dt * (fVisG / mj);
-
-}
-
 void Particle::CalcDensity()
 {
-	float sum = 0;
+	density = 0;
 	float a = 0;
 	glm::vec2 b(0, 0);
+
 	for (Particle* p : neighbors)
 	{
 		float xij = glm::length(pos - p->pos);
 
 
-		sum += mj * Kernel::poly6((xij));
+		density += mj * Kernel::poly6((xij));
 	}
-	density = sum;
+	if (neighbors.size() == 0)
+		density = p0;
 }
 
 
@@ -78,9 +67,9 @@ glm::vec2 Particle::fViscosity()
 	{
 		float pj = p->density;
 		glm::vec2 vj = p->localVelocity;
-		glm::vec2 vij = vj - vi;
+		glm::vec2 vji = vj - vi;
 		glm::vec2 xij = (pos - p->pos);
-		sum += (mj / pj) * vij * Kernel::viscosityLap(glm::length(xij));
+		sum += (mj / pj) * vji * Kernel::viscosityLap(glm::length(xij));
 	}
 	return  vis * sum;
 
@@ -100,7 +89,7 @@ glm::vec2 Particle::calcForces()
 
 void Particle::CalcVelocity(float dt)
 {
-	localVelocity += calcForces() /mj;
+	localVelocity += calcForces() / mj;
 }
 
 void Particle::CalcPosition(float dt)
@@ -117,7 +106,6 @@ Particle::~Particle()
 void Particle::clear()
 {
 	neighbors.clear();
-	Fi = glm::vec3(0, 0, 0);
 }
 
 void Particle::addNeighbor(Particle* p)

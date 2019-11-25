@@ -6,7 +6,7 @@
 Program::Program(int height, int width)
 	: height(height), width(width)
 {
-	pc = new ParticleContainer(1000,Rect(-200, 200,200,-200));
+	pc = new ParticleContainer(3000,Rect(-200, 200,200,-200));
 }
 
 
@@ -62,7 +62,7 @@ void Program::draw(sf::RenderWindow& window)
 		const int y = pos[i + 1];
 		int z = pos[i + 2];
 
-		sf::CircleShape shape(3.0f);
+		sf::CircleShape shape(15.0f);
 		shape.setFillColor(sf::Color::Blue);
 		shape.setPosition(x, y);
 		window.draw(shape);

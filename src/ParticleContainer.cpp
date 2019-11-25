@@ -4,7 +4,7 @@
 #include "rect.h"
 #include "Constants.h"
 #define lambda 0.4
-#define BUFFER 0.2f
+#define BUFFER 0.3f
 
 ParticleContainer::ParticleContainer(int MAXPARTICLES, Rect boundaries)
 	: MAXPARTICLES(MAXPARTICLES), boundaries(boundaries)
@@ -14,28 +14,15 @@ ParticleContainer::ParticleContainer(int MAXPARTICLES, Rect boundaries)
 
 	int index = 0;
 
-	for (int i = 0; i < MAXPARTICLES / 2 / 2; i++)
+	for (int i = 0; i < MAXPARTICLES / 20; i++)
 	{
-		for (int j = 0; j < 2; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			float x = -5.0f - (i * (particleSize + BUFFER));
-			float y = 5.0f + (j * (particleSize + BUFFER)) - (i * (particleSize + BUFFER));
+			float y = -200.0f + (j * 20 * (particleSize + BUFFER)); 
 			glm::vec3 pos(x, y, 1);
-			glm::vec3 vel(20.0f, 20.0f, 0);
-			particles.push_back(Particle(pos, vel, index, 1.0f));
-			index++;
-		}
-	}
-
-	for (int i = 0; i < MAXPARTICLES / 2 / 2; i++)
-	{
-		for (int j = 0; j < 2; j++)
-		{
-			float x = 5.0f + (i * (particleSize + BUFFER));
-			float y = 5.0f + (j * (particleSize + BUFFER)) - (i * (particleSize + BUFFER));
-			glm::vec3 pos(x, y, 1);
-			glm::vec3 vel(-20.0f, 20.0f, 0);
-			particles.push_back(Particle(pos, vel, index, 1.0f));
+			glm::vec3 vel(0.0f, 0.0f, 0);
+			particles.push_back(Particle(pos, vel, index));
 			index++;
 		}
 	}
