@@ -15,10 +15,12 @@ public:
 	void addNeighbor(Particle *p);
 
 	void CalcImmediateVelocity(float dt);
+	void CalcDensity();
 	void CalcImmediateDensity(float dt);
 
-	void fPressure();
+	glm::vec2 fPressure();
 	glm::vec2 fViscosity();
+	glm::vec2 calcForces();
 	glm::vec2 fOther();
 
 	void CalcVelocity(float dt);

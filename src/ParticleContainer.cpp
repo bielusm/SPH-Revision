@@ -47,37 +47,21 @@ ParticleContainer::ParticleContainer(int MAXPARTICLES, Rect boundaries)
 void ParticleContainer::updateParticles(float dt)
 {
 	int i = 0;
-	int maxIndex = 0;
-	float maxVal2 = 0.0000000001;
 	for (Particle& p : particles)
 	{
 		p.clear();
 		findNeighbors(p, i);
-		float velLen2 = glm::length2(p.localVelocity);
-		if (velLen2 > maxVal2)
-		{
-			maxVal2 = velLen2;
-			maxIndex = i;
-		}
 		i++;
 	}
-	float  maxVal = sqrt(maxVal2);
 	float stepVal;
 
 	stepVal = 0.001f;
 	for (Particle& p : particles)
 	{
-		p.CalcImmediateVelocity(stepVal);
-	}
-	for (Particle& p : particles)
-	{
-		p.CalcImmediateDensity(stepVal);
+		p.CalcDensity();
 		p.CalcPressure();
 	}
-	for (Particle& p : particles)
-	{
-		p.fPressure();
-	}
+
 	for (Particle& p : particles)
 	{
 
@@ -95,7 +79,8 @@ void ParticleContainer::findNeighbors(Particle& p, int pIndex)
 	for (int i = 0; i < indices.size(); i++)
 	{
 		Particle* j = &particles[indices[i]];
-		if (glm::distance(p.pos, j->pos) < hVal)
+		const float dist = glm::distance(p.pos, j->pos);
+		if (dist < hVal && dist > 0)
 		{
 			p.addNeighbor(j);
 		}

@@ -15,4 +15,4 @@ const float hVal = 3.0f * particleSize;
 //IHMSEN M., CORNELIS J., SOLENTHALER B., HORVATH C., TESCHNER M.: Implicit incompressible SPH.IEEE
 //Transactions on Visualization and Computer Graphicss
 //found in https://cg.informatik.uni-freiburg.de/publications/2014_EG_SPH_STAR.pdf
-const float mj = pow(2.0f / 3.0f * hVal, 3) * p0;
+const float mj = powf(2.0f / 3.0f * hVal, 3) * p0;
