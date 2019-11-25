@@ -10,7 +10,7 @@ public:
 	Particle(glm::vec2 pos, glm::vec2 localVelocity, int index, float size);
 	~Particle();
 	
-	glm::vec2 PressurePi(glm::vec2 pi);
+	float PressurePi(float pi);
 	void clear();
 	void addNeighbor(Particle *p);
 
@@ -29,7 +29,7 @@ public:
 	glm::vec2 localVelocity;
 	glm::vec2 immediateVel;
 	void CalcPressure();
-	glm::vec2 density;
+	float density;
 	glm::vec2 dPi;
 	glm::vec2 pressure;
 	std::vector<Particle*> neighbors;
@@ -37,7 +37,7 @@ public:
 	float size;
 	glm::vec2 Fi;
 	glm::vec2 pressureForce;
-	glm::vec2 pressurePi;
+	float pressurePi;
 	glm::ivec2 gridCoords;
 	int index;
 };

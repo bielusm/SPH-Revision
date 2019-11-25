@@ -17,12 +17,12 @@ void Particle::CalcPressure()
 	}
 	else
 	{
-		density = glm::vec2(p0, p0);
+		density = p0;
 		pressurePi = PressurePi(density);
 	}
 }
 
-glm::vec2 Particle::PressurePi(glm::vec2 dPi)
+float Particle::PressurePi(float dPi)
 {
 	//http://matthias-mueller-fischer.ch/publications/sca03.pdf
 	//proposed by Desbrun and Gascuel 1996
@@ -38,7 +38,7 @@ void Particle::CalcImmediateVelocity(float dt)
 
 void Particle::CalcDensity()
 {
-	glm::vec2 sum(0, 0);
+	float sum = 0;
 	float a = 0;
 	glm::vec2 b(0, 0);
 	for (Particle* p : neighbors)
@@ -57,13 +57,13 @@ void Particle::CalcDensity()
 //from Mathhias Muller et all
 glm::vec2 Particle::fPressure()
 {
-	glm::vec2 Ai = pressurePi;
+	float Ai = pressurePi;
 
 	pressureForce = { 0.0f,0.0f };
 	for (Particle* p : neighbors)
 	{
-		glm::vec2 Aj = p->pressurePi;
-		glm::vec2 phiJ = p->density;
+		float Aj = p->pressurePi;
+		float phiJ = p->density;
 
 		pressureForce += mj * (Ai + Aj) / (phiJ * 2.0f) * Kernel::spikyGrad(glm::length(pos - p->pos));
 	}
@@ -76,7 +76,7 @@ glm::vec2 Particle::fViscosity()
 	glm::vec2 vi = localVelocity;
 	for (Particle* p : neighbors)
 	{
-		glm::vec2 pj = p->density;
+		float pj = p->density;
 		glm::vec2 vj = p->localVelocity;
 		glm::vec2 vij = vi - vj;
 		glm::vec2 xij = (pos - p->pos);
