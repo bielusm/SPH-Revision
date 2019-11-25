@@ -78,7 +78,7 @@ glm::vec2 Particle::fViscosity()
 	{
 		float pj = p->density;
 		glm::vec2 vj = p->localVelocity;
-		glm::vec2 vij = vi - vj;
+		glm::vec2 vij = vj - vi;
 		glm::vec2 xij = (pos - p->pos);
 		sum += (mj / pj) * vij * Kernel::viscosityLap(glm::length(xij));
 	}

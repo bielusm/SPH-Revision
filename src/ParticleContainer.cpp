@@ -4,7 +4,7 @@
 #include "rect.h"
 #include "Constants.h"
 #define lambda 0.4
-#define BUFFER 0.1f
+#define BUFFER 0.2f
 
 ParticleContainer::ParticleContainer(int MAXPARTICLES, Rect boundaries)
 	: MAXPARTICLES(MAXPARTICLES), boundaries(boundaries)
