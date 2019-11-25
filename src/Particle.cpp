@@ -24,11 +24,6 @@ void Particle::CalcPressure()
 
 glm::vec2 Particle::PressurePi(glm::vec2 dPi)
 {
-	//float x, y;
-	//x = pow(density.x / p0, 7);
-	//y = pow(density.y / p0, 7);
-	//glm::vec2 pressurePi(x, y);
-	//return k * (pressurePi - 1.0f);
 	//http://matthias-mueller-fischer.ch/publications/sca03.pdf
 	//proposed by Desbrun and Gascuel 1996
 	return k * (density - p0);
@@ -52,10 +47,6 @@ void Particle::CalcDensity()
 
 
 		sum += mj * Kernel::poly6((xij));
-	}
-	if (sum.length > 0)
-	{
-		sum = sum;
 	}
 	density = sum;
 }
