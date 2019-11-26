@@ -33,7 +33,6 @@ private:
 	glm::vec2 fOther();
 	glm::vec2 dPi;
 	glm::vec2 pressure;
-	glm::vec2 pressureForce;
 	float pressurePi;
 
 

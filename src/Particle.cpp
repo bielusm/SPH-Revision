@@ -42,23 +42,23 @@ void Particle::CalcDensity()
 
 
 
-//using https://www10.cs.fau.de/publications/theses/2010/Staubach_BT_2010.pdf
-//from Mathhias Muller et all
+//pressure calculation from https://bigtheta.io/2017/07/08/implementing-sph-in-2d.html
 glm::vec2 Particle::fPressure()
 {
 	float Ai = pressurePi;
 
-	pressureForce = { 0.0f,0.0f };
+	glm::vec2 pressureForce = { 0.0f,0.0f };
 	for (Particle* p : neighbors)
 	{
 		float Aj = p->pressurePi;
 		float phiJ = p->density;
 
-		pressureForce += ((Ai + Aj)/ 2.0f) * (mj /phiJ) * Kernel::spikyGrad(glm::length(pos - p->pos));
+		pressureForce += glm::normalize(pos-p->pos) *((Ai + Aj)/ 2.0f) * (mj /phiJ) * Kernel::spikyGrad(glm::length(pos - p->pos));
 	}
 	return -pressureForce;
 }
 
+//viscosity calculation from https://bigtheta.io/2017/07/08/implementing-sph-in-2d.html
 glm::vec2 Particle::fViscosity()
 {
 	glm::vec2 sum(0.0f, 0.0f);
@@ -69,9 +69,10 @@ glm::vec2 Particle::fViscosity()
 		glm::vec2 vj = p->localVelocity;
 		glm::vec2 vji = vj - vi;
 		glm::vec2 xij = (pos - p->pos);
-		sum += (mj / pj) * vji * Kernel::viscosityLap(glm::length(xij));
+		sum+= vis * mj * (vji)/p->density * Kernel::viscosityLap(glm::length(xij));
+		//	sum += (mj / pj) * vji * Kernel::viscosityLap(glm::length(xij));
 	}
-	return  vis * sum;
+	return  sum;
 
 }
 
