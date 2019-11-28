@@ -41,7 +41,7 @@ For each timestep
     Calculate the velocity of each particle from the forces
     Calculate the position of each particle from the velocity
 ```
-# References
+## References
 For this simulation I used these references as well as many more:
 
 [SPH Fluids in Computer Graphics](https://cg.informatik.uni-freiburg.de/publications/2014_EG_SPH_STAR.pdf)
