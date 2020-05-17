@@ -10,7 +10,7 @@ A fluid simulation using the smoothed-particle hydrodynamics method.
 2. [SFML](https://www.sfml-dev.org)
 
 ## Demo 
-[Demo Video](https://youtu.be/nFGOnyIo52U)
+[Demo Video](https://youtu.be/mONTzI2Laqk)
 
 ## Parameters 
 Various parameters can be adjusted in the file constants.h to give different simulations
